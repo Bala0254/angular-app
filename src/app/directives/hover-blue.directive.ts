@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
   selector: '[appHoverBlue]',
@@ -8,7 +8,7 @@ export class HoverBlueDirective {
 
   @Input() appHoverBlue = '';
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(private el: ElementRef) {}
 
   @HostListener('mouseenter') onMouseEnter() {
     this.hightlight(this.appHoverBlue || 'yellow');
