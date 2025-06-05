@@ -1,0 +1,40 @@
+<h1>User List Component</h1>
+
+
+<div>
+  <input type="text" placeholder="Search by name or email" [formControl]="searchControl"/>
+
+  <select (change)="onRoleChange($event)">
+    <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+  </select>
+
+  <button (click)="toggleForm()">Add User</button>
+  <app-add-edit-user *ngIf="showForm" (userCreated)="onUserCreated($event)"></app-add-edit-user>
+
+  <table border="1" width="100%">
+    <thead>
+      <tr>
+        <th [appHoverBlue]="''">Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of pagedUsers">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button (click)="onDelete(user.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Prev</button>
+    <span>Page {{ currentPage }} / {{ totalPages }}</span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+</div>
